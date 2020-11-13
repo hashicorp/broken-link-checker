@@ -5,5 +5,10 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello world")
+	brokenLinkChecker := &BrokenLinkChecker{
+		MaxConnections: 10,
+	}
+
+	pages, _ := brokenLinkChecker.Check("https://waypointproject.io")
+	fmt.Println(pages)
 }
