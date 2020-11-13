@@ -47,11 +47,11 @@ func main() {
 // prettyPrintErrors prints out all of the broken link errors in a CLI friendly manner
 func prettyPrintErrors(pages []Page) {
 	for _, page := range pages {
-		fmt.Println("Page:", page.URL)
+		fmt.Fprintf(os.Stderr, "Page: %s\n", page.URL)
 		for _, link := range page.BrokenLinks {
-			fmt.Println(fmt.Sprintf("  -> %s: %s", link.Error, link.URL))
+			fmt.Fprintf(os.Stderr, "  -> %s: %s\n", link.Error, link.URL)
 		}
-		fmt.Println("")
+		fmt.Fprintf(os.Stderr, "\n")
 	}
 }
 
