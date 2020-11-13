@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -10,8 +11,7 @@ func main() {
 		MaxConnections: 5,
 	}
 
-	pages, _ := brokenLinkChecker.Check("https://waypointproject.io")
-
+	pages, _ := brokenLinkChecker.Check(os.Args[1])
 	b, _ := json.Marshal(pages)
 	fmt.Println(string(b))
 }

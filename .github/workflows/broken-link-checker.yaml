@@ -28,4 +28,4 @@ jobs:
       run: go build
 
     - name: Run
-      run: ./broken-link-checker
+      run: ./broken-link-checker ${{ github.event.inputs.preview_url }}
