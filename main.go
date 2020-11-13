@@ -37,6 +37,11 @@ func main() {
 	} else {
 		prettyPrintErrors(filteredPages)
 	}
+
+	// Exit with an error if there are any non-dubious errors
+	if len(filteredPages) > 0 {
+		os.Exit(1)
+	}
 }
 
 // prettyPrintErrors prints out all of the broken link errors in a CLI friendly manner
