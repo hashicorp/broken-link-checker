@@ -1,0 +1,15 @@
+name: Broken Link Checker
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_url:
+        description: 'The Vercel Preview URL'
+        required: true
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Run ${{ github.event.inputs.preview_url }}"
