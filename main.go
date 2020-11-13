@@ -27,11 +27,16 @@ func main() {
 	}
 
 	// Run the broken link checker on the page
-	pages, _ := brokenLinkChecker.Check(os.Args[1])
-	filteredPages := filterErrors(pages)
+	allPages, _ := brokenLinkChecker.Check(os.Args[1])
+	filteredPages := filterErrors(allPages)
 
-	prettyPrintErrors(filteredPages)
-
+	// Print all the errors
+	verbose, _ := strconv.ParseBool(os.Getenv("VERBOSE"))
+	if verbose {
+		prettyPrintErrors(allPages)
+	} else {
+		prettyPrintErrors(filteredPages)
+	}
 }
 
 // prettyPrintErrors prints out all of the broken link errors in a CLI friendly manner
