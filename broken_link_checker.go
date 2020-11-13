@@ -38,7 +38,7 @@ func (c *BrokenLinkChecker) Check(url string) ([]Page, error) {
 		params = append(params, fmt.Sprintf("--timeout=%d", c.Timeout))
 	}
 	for _, exclusion := range c.Exclusions {
-		params = append(params, fmt.Sprintf("--exclude=%s", exclusion))
+		params = append(params, fmt.Sprintf("--exclude=.*%s.*", exclusion))
 	}
 	params = append(params, "--json")
 	params = append(params, url)

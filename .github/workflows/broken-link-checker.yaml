@@ -29,3 +29,7 @@ jobs:
 
     - name: Run
       run: ./broken-link-checker ${{ github.event.inputs.preview_url }}
+      env:
+        MAX_CONNECTIONS: 5
+        TIMEOUT_SECONDS: 10
+        EXCLUSIONS: linkedin.com,facebook.com
