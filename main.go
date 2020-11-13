@@ -1,14 +1,17 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
 func main() {
 	brokenLinkChecker := &BrokenLinkChecker{
-		MaxConnections: 10,
+		MaxConnections: 5,
 	}
 
 	pages, _ := brokenLinkChecker.Check("https://waypointproject.io")
-	fmt.Println(pages)
+
+	b, _ := json.Marshal(pages)
+	fmt.Println(string(b))
 }
