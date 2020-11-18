@@ -15,8 +15,7 @@ jobs:
   check_links:
     # Sender id is Vercel's
     if: github.event.deployment_status.state == 'success' && github.event.sender.id == 35613825
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-16.04
     steps:
     - name: Install Go
       uses: actions/setup-go@v2
