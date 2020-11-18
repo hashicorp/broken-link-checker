@@ -33,3 +33,29 @@ jobs:
         TIMEOUT_SECONDS: 10
         EXCLUSIONS: linkedin.com,facebook.com
 ```
+
+## Configuration
+
+At the bottom of the file above, there are four environment variables that can be adjusted.
+
+#### VERBOSE
+
+Having this enabled will echo out all errors that came from Muffet that we deem dubious as specified by the [filterErrors](https://github.com/hashicorp/broken-link-checker/blob/master/main.go#L60) function.
+
+This filters out a bunch of things that would have triggered an error (failed Github workflow) that really aren't indicative of an actual problem.
+
+#### MAX_CONNECTIONS
+
+In order to limit the number of 429 errors this is exposed as an environment variable.
+
+The higher the value the quicker this script will run, but the more likely that servers will hit you with 429s.
+
+#### TIMEOUT_SECONDS
+
+The max amount of time a request can take before canceling.
+
+#### EXCLUSIONS
+
+Allows the filtering of specific domains to not check links from.
+
+This is helpful for sites like LinkedIn who successfully detect the request comes from bots and throws an error.
