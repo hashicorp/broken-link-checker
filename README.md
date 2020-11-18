@@ -1,7 +1,5 @@
 # Broken Link Checker
 
-> Note: this repo is in an experimental phase and is not ready for use.
-
 A wrapper around [muffet](https://github.com/raviqqe/muffet) to automate broken link checking for HashiCorp properties.
 
 ## Usage
@@ -10,13 +8,17 @@ Create a Github workflow file in your repository located at `/.github/workflows/
 
 ```yaml
 name: Broken Link Checker
-on: [deployment_status]
+on: [push]
 jobs:
   check_links:
-    # Sender id is Vercel's
-    if: github.event.deployment_status.state == 'success' && github.event.sender.id == 35613825
     runs-on: ubuntu-16.04
     steps:
+    - uses: SFDigitalServices/wait-for-deployment-action@v2
+      id: deployment
+      with:
+        timeout: 600
+        github-token: ${{ github.token }}
+        environment: Preview
     - name: Install Go
       uses: actions/setup-go@v2
       with:
@@ -26,7 +28,7 @@ jobs:
     - name: Install Broken Link Checker
       run: GO111MODULE=on go get -u github.com/hashicorp/broken-link-checker
     - name: Run
-      run: broken-link-checker ${{ github.event.deployment_status.target_url }}
+      run: broken-link-checker ${{ steps.deployment.outputs.url }}
       env:
         VERBOSE: true
         MAX_CONNECTIONS: 5
