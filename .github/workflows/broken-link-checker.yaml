@@ -1,0 +1,28 @@
+name: Broken Link Checker
+on:
+  workflow_dispatch:
+    inputs:
+      test_url:
+        description: 'The URL to perform link checking on'
+        required: true
+jobs:
+  check_links:
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.15.x
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Muffet
+      run: GO111MODULE=on go get -u github.com/raviqqe/muffet/v2
+    - name: Build
+      run: go build
+    - name: Run
+      run: ./broken-link-checker ${{ github.event.inputs.test_url }}
+      env:
+        VERBOSE: true
+        MAX_CONNECTIONS: 5
+        TIMEOUT_SECONDS: 10
+        EXCLUSIONS: linkedin.com,facebook.com
