@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@93397bea11091df50f3d7e59dc26a7711a8bcfbe # v4.1.0
       with:
         go-version: 1.15.x
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
     - name: Install Muffet
       run: GO111MODULE=on go get -u github.com/raviqqe/muffet/v2
     - name: Build
